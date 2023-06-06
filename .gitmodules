@@ -1,0 +1,9 @@
+[submodule "opentelemetry-proto"]
+	path = opentelemetry-proto
+	url = git@github.com:open-telemetry/opentelemetry-proto.git
+[submodule "skywalking-data-collect-protocol"]
+	path = skywalking-data-collect-protocol
+	url = git@github.com:apache/skywalking-data-collect-protocol.git
+[submodule "pinpoint-grpc-idl"]
+	path = pinpoint-grpc-idl
+	url = git@github.com:pinpoint-apm/pinpoint-grpc-idl.git
