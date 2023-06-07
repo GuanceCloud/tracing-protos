@@ -72,7 +72,7 @@ gen-opentelemetry: ${otel_dir}
 	@cd ${otel_dir};git checkout main
 
 ${otel_dir}:
-	git clone -v git@github.com:open-telemetry/opentelemetry-proto.git
+	git clone -v ${otel_remote}
 
 .PHONY: gen-pinpoint
 gen-pinpoint: ${pp_dir}
@@ -83,14 +83,14 @@ gen-pinpoint: ${pp_dir}
 	@cd ${pp_dir};git checkout master
 
 ${pp_dir}:
-	git clone -v git@github.com:pinpoint-apm/pinpoint-grpc-idl.git
+	git clone -v ${pp_remote}
 
 .PHONY: gen-skywalking
 gen-skywalking: ${sky_dir}
 	@$(foreach tag, ${sky_proto_tag}, $(call generate_proto, master,${tag},${sky_dir},${sky_dir},${sky_gen_dir}))
 
 ${sky_dir}:
-	git clone -v git@github.com:apache/skywalking-data-collect-protocol.git
+	git clone -v ${sky_remote}
 
 clean:
 	@rm -rf ${otel_gen_dir} ${pp_gen_dir} ${sky_gen_dir}
