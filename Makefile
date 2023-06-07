@@ -14,6 +14,7 @@ $(error install protoc first)
 endif
 
 # generate proto for open-telemetry
+otel_remote       := git@github.com:CodapeWild/opentelemetry-proto.git
 otel_proto_tag    := v0.19.0
 otel_dir          := opentelemetry-proto
 otel_proto_dir    := ${otel_dir}/opentelemetry/proto
@@ -21,6 +22,7 @@ otel_proto_files  = $(wildcard ${otel_proto_dir}/*/*/*.proto ${otel_proto_dir}/*
 otel_gen_dir      := ${otel_dir}/gen
 
 # generate proto for pinpoint
+pp_remote       := git@github.com:CodapeWild/pinpoint-grpc-idl.git
 pp_proto_tag    := v2.3.1-fixed
 pp_dir          := pinpoint-grpc-idl
 pp_proto_dir    := ${pp_dir}/proto
@@ -28,9 +30,10 @@ pp_proto_files  = $(wildcard ${pp_proto_dir}/*/*.proto)
 pp_gen_dir      := ${pp_dir}/gen
 
 # generate proto for skywalking
-sky_proto_tag   := v8.3.0-fixed v9.4.0-fixed
-sky_dir         := skywalking-data-collect-protocol
-sky_gen_dir     := ${sky_dir}/gen
+sky_remote    := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
+sky_proto_tag := v8.3.0-fixed v9.4.0-fixed
+sky_dir       := skywalking-data-collect-protocol
+sky_gen_dir   := ${sky_dir}/gen
 
 # protoc env configuration
 # "protoc": {
