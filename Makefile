@@ -96,3 +96,6 @@ ${sky_dir}:
 
 clean:
 	@rm -rf ${otel_gen_dir} ${pp_gen_dir} ${sky_gen_dir}
+
+rm:
+	@rm -rf ${otel_dir} ${pp_dir} ${sky_dir}
