@@ -58,6 +58,7 @@ define generate_proto
 	mkdir -p ./${5}/${2}
 	echo "${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out==./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")"
 	${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out=./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")
+	cd ${3};git checkout ${1}
 
 endef
 
