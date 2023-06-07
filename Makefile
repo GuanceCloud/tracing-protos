@@ -56,7 +56,8 @@ sky_gen_dir   := ${sky_dir}/gen
 define generate_proto
 	rm -rf ./${5}/${2}
 	mkdir -p ./${5}/${2}
-	${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out=./${5}/${2} $(shell cd ${3};git checkout ${2};cd ..;find ./${3} -type f -iname "*.proto")
+	echo "${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out==./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")"
+	${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out=./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")
 
 endef
 
