@@ -63,7 +63,7 @@ define generate_proto
 endef
 
 .DEFAULT: gen-all
-gen-all: gen-opentelemetry gen-pinpoint gen-skywalking
+gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 
 .PHONY: gen-opentelemetry
 gen-opentelemetry: ${otel_dir}
@@ -96,3 +96,6 @@ ${sky_dir}:
 
 clean:
 	@rm -rf ${otel_gen_dir} ${pp_gen_dir} ${sky_gen_dir}
+
+rm:
+	@rm -rf ${otel_dir} ${pp_dir} ${sky_dir}
