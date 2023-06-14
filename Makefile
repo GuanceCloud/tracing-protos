@@ -13,9 +13,12 @@ ifeq ($(protoc),)
 $(error install protoc first)
 endif
 
+# go path
+go_src = ${GOPATH}/src
+
 # generate proto for open-telemetry
 otel_remote       := git@github.com:CodapeWild/opentelemetry-proto.git
-otel_proto_tag    := v0.19.0
+otel_proto_tag    := v0.19.0-fixed
 otel_dir          := opentelemetry-proto
 otel_proto_dir    := ${otel_dir}/opentelemetry/proto
 otel_proto_files  = $(wildcard ${otel_proto_dir}/*/*/*.proto ${otel_proto_dir}/*/*/*/*.proto)
@@ -69,8 +72,8 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 gen-opentelemetry: ${otel_dir}
 	rm -rf ${otel_gen_dir}
 	mkdir ${otel_gen_dir}
-	@cd ${otel_dir};git checkout tags/${otel_proto_tag}
-	@${protoc} --proto_path=${otel_dir} --go_out=${otel_gen_dir} --go-grpc_out=${otel_gen_dir} ${otel_proto_files}
+	@cd ${otel_dir};git checkout -q ${otel_proto_tag}
+	@${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
 	@cd ${otel_dir};git checkout main
 
 ${otel_dir}:
@@ -80,7 +83,7 @@ ${otel_dir}:
 gen-pinpoint: ${pp_dir}
 	@rm -rf ${pp_gen_dir}
 	@mkdir ${pp_gen_dir}
-	@cd ${pp_dir};git checkout ${pp_proto_tag}
+	@cd ${pp_dir};git checkout -q ${pp_proto_tag}
 	@${protoc} --proto_path=${pp_proto_dir} --go_out=${pp_gen_dir} --go-grpc_out=${pp_gen_dir} ${pp_proto_files}
 	@cd ${pp_dir};git checkout master
 
