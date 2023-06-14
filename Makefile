@@ -19,7 +19,7 @@ otel_proto_tag    := v0.19.0
 otel_dir          := opentelemetry-proto
 otel_proto_dir    := ${otel_dir}/opentelemetry/proto
 otel_proto_files  = $(wildcard ${otel_proto_dir}/*/*/*.proto ${otel_proto_dir}/*/*/*/*.proto)
-otel_gen_dir      := ${otel_dir}/gen
+otel_gen_dir      := ./opentelemetry-gen-go
 
 # generate proto for pinpoint
 pp_remote       := git@github.com:CodapeWild/pinpoint-grpc-idl.git
@@ -27,13 +27,13 @@ pp_proto_tag    := v2.3.1-fixed
 pp_dir          := pinpoint-grpc-idl
 pp_proto_dir    := ${pp_dir}/proto
 pp_proto_files  = $(wildcard ${pp_proto_dir}/*/*.proto)
-pp_gen_dir      := ${pp_dir}/gen
+pp_gen_dir      := ./pinpoint-gen-go
 
 # generate proto for skywalking
 sky_remote    := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
 sky_proto_tag := v8.3.0-fixed v9.4.0-fixed
 sky_dir       := skywalking-data-collect-protocol
-sky_gen_dir   := ${sky_dir}/gen
+sky_gen_dir   := ./skywalking-gen-go
 
 # protoc env configuration
 # "protoc": {
@@ -54,8 +54,8 @@ sky_gen_dir   := ${sky_dir}/gen
 # ${4} proto dir
 # ${5} gen dir
 define generate_proto
-	rm -rf ./${5}/${2}
-	mkdir -p ./${5}/${2}
+	rm -rf ${5}/${2}
+	mkdir -p ${5}/${2}
 	echo "${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out==./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")"
 	${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out=./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")
 	cd ${3};git checkout ${1}
@@ -67,9 +67,9 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 
 .PHONY: gen-opentelemetry
 gen-opentelemetry: ${otel_dir}
+	rm -rf ${otel_gen_dir}
+	mkdir ${otel_gen_dir}
 	@cd ${otel_dir};git checkout tags/${otel_proto_tag}
-	@rm -rf ./${otel_gen_dir}
-	@mkdir ./${otel_gen_dir}
 	@${protoc} --proto_path=${otel_dir} --go_out=${otel_gen_dir} --go-grpc_out=${otel_gen_dir} ${otel_proto_files}
 	@cd ${otel_dir};git checkout main
 
@@ -78,9 +78,9 @@ ${otel_dir}:
 
 .PHONY: gen-pinpoint
 gen-pinpoint: ${pp_dir}
+	@rm -rf ${pp_gen_dir}
+	@mkdir ${pp_gen_dir}
 	@cd ${pp_dir};git checkout ${pp_proto_tag}
-	@rm -rf ./${pp_gen_dir}
-	@mkdir ./${pp_gen_dir}
 	@${protoc} --proto_path=${pp_proto_dir} --go_out=${pp_gen_dir} --go-grpc_out=${pp_gen_dir} ${pp_proto_files}
 	@cd ${pp_dir};git checkout master
 
