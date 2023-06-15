@@ -70,8 +70,8 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 
 .PHONY: gen-opentelemetry
 gen-opentelemetry: ${otel_dir}
-	rm -rf ${otel_gen_dir}
-	mkdir ${otel_gen_dir}
+	@rm -rf ${otel_gen_dir}
+	@mkdir ${otel_gen_dir}
 	@cd ${otel_dir};git checkout -q ${otel_proto_tag}
 	@${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
 	@cd ${otel_dir};git checkout main
@@ -84,7 +84,7 @@ gen-pinpoint: ${pp_dir}
 	@rm -rf ${pp_gen_dir}
 	@mkdir ${pp_gen_dir}
 	@cd ${pp_dir};git checkout -q ${pp_proto_tag}
-	@${protoc} --proto_path=${pp_proto_dir} --go_out=${pp_gen_dir} --go-grpc_out=${pp_gen_dir} ${pp_proto_files}
+	@${protoc} --proto_path=${pp_proto_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${pp_proto_files}
 	@cd ${pp_dir};git checkout master
 
 ${pp_dir}:
