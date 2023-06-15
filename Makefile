@@ -36,7 +36,6 @@ pp_gen_dir      := ./pinpoint-gen-go
 sky_remote    := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
 sky_proto_tag := v8.3.0-fixed v9.4.0-fixed
 sky_dir       := skywalking-data-collect-protocol
-sky_gen_dir   := ./skywalking-gen-go
 
 # protoc env configuration
 # "protoc": {
@@ -55,12 +54,10 @@ sky_gen_dir   := ./skywalking-gen-go
 # ${2} expected branch
 # ${3} dir
 # ${4} proto dir
-# ${5} gen dir
 define generate_proto
-	rm -rf ${5}/${2}
-	mkdir -p ${5}/${2}
-	echo "${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out==./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")"
-	${protoc} --proto_path=./${3} --go_out=./${5}/${2} --go-grpc_out=./${5}/${2} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")
+	echo "expected branch:${2}"
+	echo "${protoc} --proto_path=./${3} --go_opt=paths=import --go_out=${go_src} --go-grpc_out==${go_src} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")"
+	${protoc} --proto_path=./${3} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} $(shell cd ${3};git checkout -q ${2};cd ..;find ./${3} -type f -iname "*.proto")
 	cd ${3};git checkout ${1}
 
 endef
@@ -70,10 +67,8 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 
 .PHONY: gen-opentelemetry
 gen-opentelemetry: ${otel_dir}
-	@rm -rf ${otel_gen_dir}
-	@mkdir ${otel_gen_dir}
 	@cd ${otel_dir};git checkout -q ${otel_proto_tag}
-	@${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
+	${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
 	@cd ${otel_dir};git checkout main
 
 ${otel_dir}:
@@ -81,24 +76,27 @@ ${otel_dir}:
 
 .PHONY: gen-pinpoint
 gen-pinpoint: ${pp_dir}
-	@rm -rf ${pp_gen_dir}
-	@mkdir ${pp_gen_dir}
 	@cd ${pp_dir};git checkout -q ${pp_proto_tag}
-	@${protoc} --proto_path=${pp_proto_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${pp_proto_files}
+	${protoc} --proto_path=${pp_proto_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${pp_proto_files}
 	@cd ${pp_dir};git checkout master
 
 ${pp_dir}:
 	git clone -v ${pp_remote}
 
 .PHONY: gen-skywalking
-gen-skywalking: ${sky_dir}
-	@$(foreach tag, ${sky_proto_tag}, $(call generate_proto, master,${tag},${sky_dir},${sky_dir},${sky_gen_dir}))
+gen-skywalking: ${sky_dir} gen-v8.3.0 gen-v9.4.0
+
+gen-v8.3.0:
+	@$(call generate_proto, master,v8.3.0-fixed,${sky_dir},${sky_dir})
+
+gen-v9.4.0:
+	@$(call generate_proto, master,v9.4.0-fixed,${sky_dir},${sky_dir})
 
 ${sky_dir}:
 	git clone -v ${sky_remote}
 
 clean:
-	@rm -rf ${otel_gen_dir} ${pp_gen_dir} ${sky_gen_dir}
+	@rm -rf ${otel_gen_dir} ${pp_gen_dir} skywalking-v8.3.0-gen-go skywalking-v9.4.0-gen-go
 
 rm:
 	@rm -rf ${otel_dir} ${pp_dir} ${sky_dir}
