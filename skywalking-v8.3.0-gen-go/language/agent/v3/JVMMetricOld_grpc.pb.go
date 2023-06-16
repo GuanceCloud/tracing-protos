@@ -31,7 +31,7 @@ func NewJVMMetricReportServiceClient(cc grpc.ClientConnInterface) JVMMetricRepor
 
 func (c *jVMMetricReportServiceClient) Collect(ctx context.Context, in *JVMMetricCollection, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/skywalking.v3.old.JVMMetricReportService/collect", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/JVMMetricReportService/collect", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func _JVMMetricReportService_Collect_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/skywalking.v3.old.JVMMetricReportService/collect",
+		FullMethod: "/JVMMetricReportService/collect",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(JVMMetricReportServiceServer).Collect(ctx, req.(*JVMMetricCollection))
@@ -86,7 +86,7 @@ func _JVMMetricReportService_Collect_Handler(srv interface{}, ctx context.Contex
 }
 
 var _JVMMetricReportService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "skywalking.v3.old.JVMMetricReportService",
+	ServiceName: "JVMMetricReportService",
 	HandlerType: (*JVMMetricReportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

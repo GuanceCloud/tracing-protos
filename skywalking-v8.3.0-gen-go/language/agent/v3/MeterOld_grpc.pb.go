@@ -32,7 +32,7 @@ func NewMeterReportServiceClient(cc grpc.ClientConnInterface) MeterReportService
 }
 
 func (c *meterReportServiceClient) Collect(ctx context.Context, opts ...grpc.CallOption) (MeterReportService_CollectClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_MeterReportService_serviceDesc.Streams[0], "/skywalking.v3.old.MeterReportService/collect", opts...)
+	stream, err := c.cc.NewStream(ctx, &_MeterReportService_serviceDesc.Streams[0], "/MeterReportService/collect", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func (x *meterReportServiceCollectServer) Recv() (*MeterData, error) {
 }
 
 var _MeterReportService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "skywalking.v3.old.MeterReportService",
+	ServiceName: "MeterReportService",
 	HandlerType: (*MeterReportServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

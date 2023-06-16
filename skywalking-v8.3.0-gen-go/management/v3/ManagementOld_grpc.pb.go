@@ -36,7 +36,7 @@ func NewManagementServiceClient(cc grpc.ClientConnInterface) ManagementServiceCl
 
 func (c *managementServiceClient) ReportInstanceProperties(ctx context.Context, in *InstanceProperties, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/skywalking.v3.old.ManagementService/reportInstanceProperties", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ManagementService/reportInstanceProperties", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (c *managementServiceClient) ReportInstanceProperties(ctx context.Context, 
 
 func (c *managementServiceClient) KeepAlive(ctx context.Context, in *InstancePingPkg, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/skywalking.v3.old.ManagementService/keepAlive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ManagementService/keepAlive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func _ManagementService_ReportInstanceProperties_Handler(srv interface{}, ctx co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/skywalking.v3.old.ManagementService/reportInstanceProperties",
+		FullMethod: "/ManagementService/reportInstanceProperties",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ManagementServiceServer).ReportInstanceProperties(ctx, req.(*InstanceProperties))
@@ -116,7 +116,7 @@ func _ManagementService_KeepAlive_Handler(srv interface{}, ctx context.Context, 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/skywalking.v3.old.ManagementService/keepAlive",
+		FullMethod: "/ManagementService/keepAlive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ManagementServiceServer).KeepAlive(ctx, req.(*InstancePingPkg))
@@ -125,7 +125,7 @@ func _ManagementService_KeepAlive_Handler(srv interface{}, ctx context.Context, 
 }
 
 var _ManagementService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "skywalking.v3.old.ManagementService",
+	ServiceName: "ManagementService",
 	HandlerType: (*ManagementServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

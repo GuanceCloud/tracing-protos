@@ -34,7 +34,7 @@ func NewBrowserPerfServiceClient(cc grpc.ClientConnInterface) BrowserPerfService
 
 func (c *browserPerfServiceClient) CollectPerfData(ctx context.Context, in *BrowserPerfData, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/skywalking.v3.old.BrowserPerfService/collectPerfData", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/BrowserPerfService/collectPerfData", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *browserPerfServiceClient) CollectPerfData(ctx context.Context, in *Brow
 }
 
 func (c *browserPerfServiceClient) CollectErrorLogs(ctx context.Context, opts ...grpc.CallOption) (BrowserPerfService_CollectErrorLogsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_BrowserPerfService_serviceDesc.Streams[0], "/skywalking.v3.old.BrowserPerfService/collectErrorLogs", opts...)
+	stream, err := c.cc.NewStream(ctx, &_BrowserPerfService_serviceDesc.Streams[0], "/BrowserPerfService/collectErrorLogs", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func _BrowserPerfService_CollectPerfData_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/skywalking.v3.old.BrowserPerfService/collectPerfData",
+		FullMethod: "/BrowserPerfService/collectPerfData",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BrowserPerfServiceServer).CollectPerfData(ctx, req.(*BrowserPerfData))
@@ -154,7 +154,7 @@ func (x *browserPerfServiceCollectErrorLogsServer) Recv() (*BrowserErrorLog, err
 }
 
 var _BrowserPerfService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "skywalking.v3.old.BrowserPerfService",
+	ServiceName: "BrowserPerfService",
 	HandlerType: (*BrowserPerfServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
