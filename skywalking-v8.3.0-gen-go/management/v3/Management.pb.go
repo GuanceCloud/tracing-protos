@@ -21,10 +21,10 @@
 // 	protoc        v3.19.4
 // source: management/Management.proto
 
-package v3old
+package v3
 
 import (
-	v3old "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3old"
+	v3 "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -43,9 +43,9 @@ type InstanceProperties struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Service         string                      `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
-	ServiceInstance string                      `protobuf:"bytes,2,opt,name=serviceInstance,proto3" json:"serviceInstance,omitempty"`
-	Properties      []*v3old.KeyStringValuePair `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty"`
+	Service         string                   `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
+	ServiceInstance string                   `protobuf:"bytes,2,opt,name=serviceInstance,proto3" json:"serviceInstance,omitempty"`
+	Properties      []*v3.KeyStringValuePair `protobuf:"bytes,3,rep,name=properties,proto3" json:"properties,omitempty"`
 }
 
 func (x *InstanceProperties) Reset() {
@@ -94,7 +94,7 @@ func (x *InstanceProperties) GetServiceInstance() string {
 	return ""
 }
 
-func (x *InstanceProperties) GetProperties() []*v3old.KeyStringValuePair {
+func (x *InstanceProperties) GetProperties() []*v3.KeyStringValuePair {
 	if x != nil {
 		return x.Properties
 	}
@@ -191,12 +191,12 @@ var file_management_Management_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x33, 0x2e, 0x6f, 0x6c, 0x64, 0x2e, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65,
 	0x50, 0x69, 0x6e, 0x67, 0x50, 0x6b, 0x67, 0x1a, 0x1b, 0x2e, 0x73, 0x6b, 0x79, 0x77, 0x61, 0x6c,
 	0x6b, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x33, 0x2e, 0x6f, 0x6c, 0x64, 0x2e, 0x43, 0x6f, 0x6d, 0x6d,
-	0x61, 0x6e, 0x64, 0x73, 0x22, 0x00, 0x42, 0x4d, 0x5a, 0x4b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x61, 0x6e, 0x64, 0x73, 0x22, 0x00, 0x42, 0x4a, 0x5a, 0x48, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
 	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x43, 0x6f, 0x64, 0x61, 0x70, 0x65, 0x57, 0x69, 0x6c, 0x64, 0x2f,
 	0x64, 0x6b, 0x74, 0x72, 0x61, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2f, 0x73, 0x6b, 0x79, 0x77,
 	0x61, 0x6c, 0x6b, 0x69, 0x6e, 0x67, 0x2d, 0x76, 0x38, 0x2e, 0x33, 0x2e, 0x30, 0x2d, 0x67, 0x65,
 	0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2f,
-	0x76, 0x33, 0x6f, 0x6c, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x76, 0x33, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -213,10 +213,10 @@ func file_management_Management_proto_rawDescGZIP() []byte {
 
 var file_management_Management_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_management_Management_proto_goTypes = []interface{}{
-	(*InstanceProperties)(nil),       // 0: skywalking.v3.old.InstanceProperties
-	(*InstancePingPkg)(nil),          // 1: skywalking.v3.old.InstancePingPkg
-	(*v3old.KeyStringValuePair)(nil), // 2: skywalking.v3.old.KeyStringValuePair
-	(*v3old.Commands)(nil),           // 3: skywalking.v3.old.Commands
+	(*InstanceProperties)(nil),    // 0: skywalking.v3.old.InstanceProperties
+	(*InstancePingPkg)(nil),       // 1: skywalking.v3.old.InstancePingPkg
+	(*v3.KeyStringValuePair)(nil), // 2: skywalking.v3.old.KeyStringValuePair
+	(*v3.Commands)(nil),           // 3: skywalking.v3.old.Commands
 }
 var file_management_Management_proto_depIdxs = []int32{
 	2, // 0: skywalking.v3.old.InstanceProperties.properties:type_name -> skywalking.v3.old.KeyStringValuePair

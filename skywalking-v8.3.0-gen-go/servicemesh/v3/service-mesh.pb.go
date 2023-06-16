@@ -21,10 +21,10 @@
 // 	protoc        v3.19.4
 // source: service-mesh-probe/service-mesh.proto
 
-package v3old
+package v3
 
 import (
-	v3old "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3old"
+	v3 "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -103,9 +103,9 @@ type ServiceMeshMetric struct {
 	Latency               int32  `protobuf:"varint,8,opt,name=latency,proto3" json:"latency,omitempty"`
 	ResponseCode          int32  `protobuf:"varint,9,opt,name=responseCode,proto3" json:"responseCode,omitempty"`
 	// Status represents the response status of this calling.
-	Status      bool              `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
-	Protocol    Protocol          `protobuf:"varint,11,opt,name=protocol,proto3,enum=skywalking.v3.old.Protocol" json:"protocol,omitempty"`
-	DetectPoint v3old.DetectPoint `protobuf:"varint,12,opt,name=detectPoint,proto3,enum=skywalking.v3.old.DetectPoint" json:"detectPoint,omitempty"`
+	Status      bool           `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
+	Protocol    Protocol       `protobuf:"varint,11,opt,name=protocol,proto3,enum=skywalking.v3.old.Protocol" json:"protocol,omitempty"`
+	DetectPoint v3.DetectPoint `protobuf:"varint,12,opt,name=detectPoint,proto3,enum=skywalking.v3.old.DetectPoint" json:"detectPoint,omitempty"`
 	// NONE, mTLS, or TLS
 	TlsMode string `protobuf:"bytes,13,opt,name=tlsMode,proto3" json:"tlsMode,omitempty"`
 	// The sidecar/proxy internal error code, the value bases on the
@@ -223,11 +223,11 @@ func (x *ServiceMeshMetric) GetProtocol() Protocol {
 	return Protocol_HTTP
 }
 
-func (x *ServiceMeshMetric) GetDetectPoint() v3old.DetectPoint {
+func (x *ServiceMeshMetric) GetDetectPoint() v3.DetectPoint {
 	if x != nil {
 		return x.DetectPoint
 	}
-	return v3old.DetectPoint(0)
+	return v3.DetectPoint(0)
 }
 
 func (x *ServiceMeshMetric) GetTlsMode() string {
@@ -337,12 +337,12 @@ var file_service_mesh_probe_service_mesh_proto_rawDesc = []byte{
 	0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x1a, 0x26, 0x2e, 0x73, 0x6b, 0x79, 0x77, 0x61, 0x6c, 0x6b,
 	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x33, 0x2e, 0x6f, 0x6c, 0x64, 0x2e, 0x4d, 0x65, 0x73, 0x68, 0x50,
 	0x72, 0x6f, 0x62, 0x65, 0x44, 0x6f, 0x77, 0x6e, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x22, 0x00,
-	0x28, 0x01, 0x42, 0x4e, 0x5a, 0x4c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x28, 0x01, 0x42, 0x4b, 0x5a, 0x49, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
 	0x2f, 0x43, 0x6f, 0x64, 0x61, 0x70, 0x65, 0x57, 0x69, 0x6c, 0x64, 0x2f, 0x64, 0x6b, 0x74, 0x72,
 	0x61, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2f, 0x73, 0x6b, 0x79, 0x77, 0x61, 0x6c, 0x6b, 0x69,
 	0x6e, 0x67, 0x2d, 0x76, 0x38, 0x2e, 0x33, 0x2e, 0x30, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f,
-	0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x33, 0x6f,
-	0x6c, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x6d, 0x65, 0x73, 0x68, 0x2f, 0x76, 0x33, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -363,7 +363,7 @@ var file_service_mesh_probe_service_mesh_proto_goTypes = []interface{}{
 	(Protocol)(0),               // 0: skywalking.v3.old.Protocol
 	(*ServiceMeshMetric)(nil),   // 1: skywalking.v3.old.ServiceMeshMetric
 	(*MeshProbeDownstream)(nil), // 2: skywalking.v3.old.MeshProbeDownstream
-	(v3old.DetectPoint)(0),      // 3: skywalking.v3.old.DetectPoint
+	(v3.DetectPoint)(0),         // 3: skywalking.v3.old.DetectPoint
 }
 var file_service_mesh_probe_service_mesh_proto_depIdxs = []int32{
 	0, // 0: skywalking.v3.old.ServiceMeshMetric.protocol:type_name -> skywalking.v3.old.Protocol

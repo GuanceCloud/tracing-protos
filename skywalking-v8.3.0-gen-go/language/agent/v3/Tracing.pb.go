@@ -21,10 +21,10 @@
 // 	protoc        v3.19.4
 // source: language-agent/Tracing.proto
 
-package v3old
+package v3
 
 import (
-	v3old "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3old"
+	v3 "github.com/CodapeWild/dktrace-idl/skywalking-v8.3.0-gen-go/common/v3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -518,7 +518,7 @@ type SpanObject struct {
 	// In the OAP backend analysis, some special tag or tag combination could
 	// provide other advanced features.
 	// https://github.com/apache/skywalking/blob/master/docs/en/guides/Java-Plugin-Development-Guide.md#special-span-tags
-	Tags []*v3old.KeyStringValuePair `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
+	Tags []*v3.KeyStringValuePair `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
 	// String key, String value pair with an accurate timestamp.
 	// Logging some events happening in the context of the span duration.
 	Logs []*Log `protobuf:"bytes,13,rep,name=logs,proto3" json:"logs,omitempty"`
@@ -639,7 +639,7 @@ func (x *SpanObject) GetIsError() bool {
 	return false
 }
 
-func (x *SpanObject) GetTags() []*v3old.KeyStringValuePair {
+func (x *SpanObject) GetTags() []*v3.KeyStringValuePair {
 	if x != nil {
 		return x.Tags
 	}
@@ -669,7 +669,7 @@ type Log struct {
 	// measured between the current time and midnight, January 1, 1970 UTC.
 	Time int64 `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
 	// String key, String value pair.
-	Data []*v3old.KeyStringValuePair `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
+	Data []*v3.KeyStringValuePair `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
 }
 
 func (x *Log) Reset() {
@@ -711,7 +711,7 @@ func (x *Log) GetTime() int64 {
 	return 0
 }
 
-func (x *Log) GetData() []*v3old.KeyStringValuePair {
+func (x *Log) GetData() []*v3.KeyStringValuePair {
 	if x != nil {
 		return x.Data
 	}
@@ -930,13 +930,13 @@ var file_language_agent_Tracing_proto_rawDesc = []byte{
 	0x6e, 0x67, 0x2e, 0x76, 0x33, 0x2e, 0x6f, 0x6c, 0x64, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e,
 	0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x1b, 0x2e, 0x73, 0x6b,
 	0x79, 0x77, 0x61, 0x6c, 0x6b, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x33, 0x2e, 0x6f, 0x6c, 0x64, 0x2e,
-	0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x73, 0x22, 0x00, 0x42, 0x51, 0x5a, 0x4f, 0x67, 0x69,
+	0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e, 0x64, 0x73, 0x22, 0x00, 0x42, 0x4e, 0x5a, 0x4c, 0x67, 0x69,
 	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x43, 0x6f, 0x64, 0x61, 0x70, 0x65, 0x57,
 	0x69, 0x6c, 0x64, 0x2f, 0x64, 0x6b, 0x74, 0x72, 0x61, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2f,
 	0x73, 0x6b, 0x79, 0x77, 0x61, 0x6c, 0x6b, 0x69, 0x6e, 0x67, 0x2d, 0x76, 0x38, 0x2e, 0x33, 0x2e,
 	0x30, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67,
-	0x65, 0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2f, 0x76, 0x33, 0x6f, 0x6c, 0x64, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2f, 0x76, 0x33, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -954,17 +954,17 @@ func file_language_agent_Tracing_proto_rawDescGZIP() []byte {
 var file_language_agent_Tracing_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_language_agent_Tracing_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_language_agent_Tracing_proto_goTypes = []interface{}{
-	(SpanType)(0),                    // 0: skywalking.v3.old.SpanType
-	(RefType)(0),                     // 1: skywalking.v3.old.RefType
-	(SpanLayer)(0),                   // 2: skywalking.v3.old.SpanLayer
-	(*SegmentObject)(nil),            // 3: skywalking.v3.old.SegmentObject
-	(*SegmentReference)(nil),         // 4: skywalking.v3.old.SegmentReference
-	(*SpanObject)(nil),               // 5: skywalking.v3.old.SpanObject
-	(*Log)(nil),                      // 6: skywalking.v3.old.Log
-	(*ID)(nil),                       // 7: skywalking.v3.old.ID
-	(*SegmentCollection)(nil),        // 8: skywalking.v3.old.SegmentCollection
-	(*v3old.KeyStringValuePair)(nil), // 9: skywalking.v3.old.KeyStringValuePair
-	(*v3old.Commands)(nil),           // 10: skywalking.v3.old.Commands
+	(SpanType)(0),                 // 0: skywalking.v3.old.SpanType
+	(RefType)(0),                  // 1: skywalking.v3.old.RefType
+	(SpanLayer)(0),                // 2: skywalking.v3.old.SpanLayer
+	(*SegmentObject)(nil),         // 3: skywalking.v3.old.SegmentObject
+	(*SegmentReference)(nil),      // 4: skywalking.v3.old.SegmentReference
+	(*SpanObject)(nil),            // 5: skywalking.v3.old.SpanObject
+	(*Log)(nil),                   // 6: skywalking.v3.old.Log
+	(*ID)(nil),                    // 7: skywalking.v3.old.ID
+	(*SegmentCollection)(nil),     // 8: skywalking.v3.old.SegmentCollection
+	(*v3.KeyStringValuePair)(nil), // 9: skywalking.v3.old.KeyStringValuePair
+	(*v3.Commands)(nil),           // 10: skywalking.v3.old.Commands
 }
 var file_language_agent_Tracing_proto_depIdxs = []int32{
 	5,  // 0: skywalking.v3.old.SegmentObject.spans:type_name -> skywalking.v3.old.SpanObject
