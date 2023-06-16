@@ -128,5 +128,5 @@ var _ServiceMeshMetricService_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "service-mesh-probe/service-mesh.proto",
+	Metadata: "service-mesh-probe/service-mesh-old.proto",
 }

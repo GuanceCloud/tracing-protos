@@ -182,5 +182,5 @@ var _TraceSegmentReportService_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "language-agent/Tracing.proto",
+	Metadata: "language-agent/TracingOld.proto",
 }

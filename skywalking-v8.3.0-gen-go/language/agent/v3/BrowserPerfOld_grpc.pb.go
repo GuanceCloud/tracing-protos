@@ -169,5 +169,5 @@ var _BrowserPerfService_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "browser/BrowserPerf.proto",
+	Metadata: "browser/BrowserPerfOld.proto",
 }

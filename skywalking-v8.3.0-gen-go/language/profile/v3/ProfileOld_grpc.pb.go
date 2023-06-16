@@ -207,5 +207,5 @@ var _ProfileTask_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "profile/Profile.proto",
+	Metadata: "profile/ProfileOld.proto",
 }
