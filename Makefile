@@ -34,7 +34,6 @@ pp_gen_dir      := ./pinpoint-gen-go
 
 # generate proto for skywalking
 sky_remote    := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
-sky_proto_tag := v8.3.0-fixed v9.4.0-fixed
 sky_dir       := skywalking-data-collect-protocol
 
 # protoc env configuration
@@ -84,13 +83,13 @@ ${pp_dir}:
 	git clone -v ${pp_remote}
 
 .PHONY: gen-skywalking
-gen-skywalking: ${sky_dir} gen-v8.3.0 gen-v9.4.0
+gen-skywalking: ${sky_dir} gen-v8.3.0 gen-v9.3.0
 
 gen-v8.3.0:
 	@$(call generate_proto, master,v8.3.0-fixed,${sky_dir},${sky_dir})
 
-gen-v9.4.0:
-	@$(call generate_proto, master,v9.4.0-fixed,${sky_dir},${sky_dir})
+gen-v9.3.0:
+	@$(call generate_proto, master,v9.3.0-fixed,${sky_dir},${sky_dir})
 
 ${sky_dir}:
 	git clone -v ${sky_remote}
