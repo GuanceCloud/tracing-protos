@@ -95,5 +95,5 @@ var _JVMMetricReportService_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "language-agent/JVMMetricOld.proto",
+	Metadata: "language-agent/JVMMetric.proto",
 }

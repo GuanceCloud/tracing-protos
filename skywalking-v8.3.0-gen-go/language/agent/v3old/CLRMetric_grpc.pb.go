@@ -95,5 +95,5 @@ var _CLRMetricReportService_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "language-agent/CLRMetricOld.proto",
+	Metadata: "language-agent/CLRMetric.proto",
 }

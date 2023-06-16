@@ -132,5 +132,5 @@ var _MeterReportService_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "language-agent/MeterOld.proto",
+	Metadata: "language-agent/Meter.proto",
 }
