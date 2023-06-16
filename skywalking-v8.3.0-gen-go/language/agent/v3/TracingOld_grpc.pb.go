@@ -39,7 +39,7 @@ func NewTraceSegmentReportServiceClient(cc grpc.ClientConnInterface) TraceSegmen
 }
 
 func (c *traceSegmentReportServiceClient) Collect(ctx context.Context, opts ...grpc.CallOption) (TraceSegmentReportService_CollectClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_TraceSegmentReportService_serviceDesc.Streams[0], "/TraceSegmentReportService/collect", opts...)
+	stream, err := c.cc.NewStream(ctx, &_TraceSegmentReportService_serviceDesc.Streams[0], "/skywalking.v3.old.TraceSegmentReportService/collect", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func (x *traceSegmentReportServiceCollectClient) CloseAndRecv() (*v3.Commands, e
 
 func (c *traceSegmentReportServiceClient) CollectInSync(ctx context.Context, in *SegmentCollection, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/TraceSegmentReportService/collectInSync", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/skywalking.v3.old.TraceSegmentReportService/collectInSync", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -158,7 +158,7 @@ func _TraceSegmentReportService_CollectInSync_Handler(srv interface{}, ctx conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/TraceSegmentReportService/collectInSync",
+		FullMethod: "/skywalking.v3.old.TraceSegmentReportService/collectInSync",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TraceSegmentReportServiceServer).CollectInSync(ctx, req.(*SegmentCollection))
@@ -167,7 +167,7 @@ func _TraceSegmentReportService_CollectInSync_Handler(srv interface{}, ctx conte
 }
 
 var _TraceSegmentReportService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "TraceSegmentReportService",
+	ServiceName: "skywalking.v3.old.TraceSegmentReportService",
 	HandlerType: (*TraceSegmentReportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

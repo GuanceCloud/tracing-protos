@@ -31,7 +31,7 @@ func NewCLRMetricReportServiceClient(cc grpc.ClientConnInterface) CLRMetricRepor
 
 func (c *cLRMetricReportServiceClient) Collect(ctx context.Context, in *CLRMetricCollection, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/CLRMetricReportService/collect", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/skywalking.v3.old.CLRMetricReportService/collect", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func _CLRMetricReportService_Collect_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/CLRMetricReportService/collect",
+		FullMethod: "/skywalking.v3.old.CLRMetricReportService/collect",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CLRMetricReportServiceServer).Collect(ctx, req.(*CLRMetricCollection))
@@ -86,7 +86,7 @@ func _CLRMetricReportService_Collect_Handler(srv interface{}, ctx context.Contex
 }
 
 var _CLRMetricReportService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "CLRMetricReportService",
+	ServiceName: "skywalking.v3.old.CLRMetricReportService",
 	HandlerType: (*CLRMetricReportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -29,7 +29,7 @@ func NewServiceMeshMetricServiceClient(cc grpc.ClientConnInterface) ServiceMeshM
 }
 
 func (c *serviceMeshMetricServiceClient) Collect(ctx context.Context, opts ...grpc.CallOption) (ServiceMeshMetricService_CollectClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ServiceMeshMetricService_serviceDesc.Streams[0], "/ServiceMeshMetricService/collect", opts...)
+	stream, err := c.cc.NewStream(ctx, &_ServiceMeshMetricService_serviceDesc.Streams[0], "/skywalking.v3.old.ServiceMeshMetricService/collect", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ func (x *serviceMeshMetricServiceCollectServer) Recv() (*ServiceMeshMetric, erro
 }
 
 var _ServiceMeshMetricService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "ServiceMeshMetricService",
+	ServiceName: "skywalking.v3.old.ServiceMeshMetricService",
 	HandlerType: (*ServiceMeshMetricServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

@@ -36,7 +36,7 @@ func NewProfileTaskClient(cc grpc.ClientConnInterface) ProfileTaskClient {
 
 func (c *profileTaskClient) GetProfileTaskCommands(ctx context.Context, in *ProfileTaskCommandQuery, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/ProfileTask/getProfileTaskCommands", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/skywalking.v3.old.ProfileTask/getProfileTaskCommands", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (c *profileTaskClient) GetProfileTaskCommands(ctx context.Context, in *Prof
 }
 
 func (c *profileTaskClient) CollectSnapshot(ctx context.Context, opts ...grpc.CallOption) (ProfileTask_CollectSnapshotClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ProfileTask_serviceDesc.Streams[0], "/ProfileTask/collectSnapshot", opts...)
+	stream, err := c.cc.NewStream(ctx, &_ProfileTask_serviceDesc.Streams[0], "/skywalking.v3.old.ProfileTask/collectSnapshot", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (x *profileTaskCollectSnapshotClient) CloseAndRecv() (*v3.Commands, error) 
 
 func (c *profileTaskClient) ReportTaskFinish(ctx context.Context, in *ProfileTaskFinishReport, opts ...grpc.CallOption) (*v3.Commands, error) {
 	out := new(v3.Commands)
-	err := c.cc.Invoke(ctx, "/ProfileTask/reportTaskFinish", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/skywalking.v3.old.ProfileTask/reportTaskFinish", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ func _ProfileTask_GetProfileTaskCommands_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProfileTask/getProfileTaskCommands",
+		FullMethod: "/skywalking.v3.old.ProfileTask/getProfileTaskCommands",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProfileTaskServer).GetProfileTaskCommands(ctx, req.(*ProfileTaskCommandQuery))
@@ -179,7 +179,7 @@ func _ProfileTask_ReportTaskFinish_Handler(srv interface{}, ctx context.Context,
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ProfileTask/reportTaskFinish",
+		FullMethod: "/skywalking.v3.old.ProfileTask/reportTaskFinish",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProfileTaskServer).ReportTaskFinish(ctx, req.(*ProfileTaskFinishReport))
@@ -188,7 +188,7 @@ func _ProfileTask_ReportTaskFinish_Handler(srv interface{}, ctx context.Context,
 }
 
 var _ProfileTask_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "ProfileTask",
+	ServiceName: "skywalking.v3.old.ProfileTask",
 	HandlerType: (*ProfileTaskServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
