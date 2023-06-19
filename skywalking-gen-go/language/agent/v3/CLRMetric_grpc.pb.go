@@ -4,7 +4,7 @@ package v3
 
 import (
 	context "context"
-	v3 "github.com/CodapeWild/dktrace-idl/skywalking-gen-go/common/v3"
+	v3 "github.com/GuanceCloud/tracing-protos/skywalking-gen-go/common/v3"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
