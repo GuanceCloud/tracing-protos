@@ -15,16 +15,16 @@ tracers included in Datakit
 - generate all idl files just run `make` under this repo dir
 - generate open-telemetry idl run:
   ```shell
-    make rm
+    make clean
     make gen-opentelemetry
   ```
 - generate pinpoint idl run:
   ```shell
-    make rm
+    make clean
     make gen-pinpoint
   ```
 - generate skywalking idl run:
   ```shell
-    make rm
+    make clean
     make gen-skywalking
   ```
