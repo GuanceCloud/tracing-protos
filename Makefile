@@ -18,7 +18,7 @@ go_src = ${GOPATH}/src
 
 # generate proto for open-telemetry
 otel_remote       := git@github.com:CodapeWild/opentelemetry-proto.git
-otel_proto_tag    := v0.19.0-fixed
+otel_proto_tag    := v0.19.0-guance
 otel_dir          := opentelemetry-proto
 otel_proto_dir    := ${otel_dir}/opentelemetry/proto
 otel_proto_files  = $(wildcard ${otel_proto_dir}/*/*/*.proto ${otel_proto_dir}/*/*/*/*.proto)
@@ -26,7 +26,7 @@ otel_gen_dir      := ./opentelemetry-gen-go
 
 # generate proto for pinpoint
 pp_remote       := git@github.com:CodapeWild/pinpoint-grpc-idl.git
-pp_proto_tag    := v2.3.1-fixed
+pp_proto_tag    := v2.3.1-guance
 pp_dir          := pinpoint-grpc-idl
 pp_proto_dir    := ${pp_dir}/proto
 pp_proto_files  = $(wildcard ${pp_proto_dir}/*/*.proto)
@@ -34,7 +34,7 @@ pp_gen_dir      := ./pinpoint-gen-go
 
 # generate proto for skywalking
 sky_remote        := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
-sky_proto_tag     := v9.4.0-fixed
+sky_proto_tag     := v9.4.0-guance
 sky_dir           := skywalking-data-collect-protocol
 sky_proto_dir     := ${sky_dir}
 sky_proto_files   = $(wildcard ${sky_proto_dir}/*/*.proto ${sky_proto_dir}/*/*/*.proto)
