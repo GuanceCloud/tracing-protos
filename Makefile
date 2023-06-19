@@ -33,8 +33,12 @@ pp_proto_files  = $(wildcard ${pp_proto_dir}/*/*.proto)
 pp_gen_dir      := ./pinpoint-gen-go
 
 # generate proto for skywalking
-sky_remote    := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
-sky_dir       := skywalking-data-collect-protocol
+sky_remote        := git@github.com:CodapeWild/skywalking-data-collect-protocol.git
+sky_proto_tag     := v9.4.0-fixed
+sky_dir           := skywalking-data-collect-protocol
+sky_proto_dir     := ${sky_dir}
+sky_proto_files   = $(wildcard ${sky_proto_dir}/*/*.proto ${sky_proto_dir}/*/*/*.proto)
+sky_gen_dir       := ./skywalking-gen-go
 
 # protoc env configuration
 # "protoc": {
@@ -68,7 +72,7 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 gen-opentelemetry: ${otel_dir}
 	@cd ${otel_dir};git checkout -q ${otel_proto_tag}
 	${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
-	@cd ${otel_dir};git checkout main
+	@cd ${otel_dir};git checkout -q main
 
 ${otel_dir}:
 	git clone -v ${otel_remote}
@@ -77,25 +81,22 @@ ${otel_dir}:
 gen-pinpoint: ${pp_dir}
 	@cd ${pp_dir};git checkout -q ${pp_proto_tag}
 	${protoc} --proto_path=${pp_proto_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${pp_proto_files}
-	@cd ${pp_dir};git checkout master
+	@cd ${pp_dir};git checkout -q master
 
 ${pp_dir}:
 	git clone -v ${pp_remote}
 
 .PHONY: gen-skywalking
-gen-skywalking: ${sky_dir} gen-v8.3.0 gen-v9.3.0
-
-gen-v8.3.0:
-	@$(call generate_proto, master,v8.3.0-fixed,${sky_dir},${sky_dir})
-
-gen-v9.3.0:
-	@$(call generate_proto, master,v9.3.0-fixed,${sky_dir},${sky_dir})
+gen-skywalking: ${sky_dir}
+	@cd ${sky_dir};git checkout -q ${sky_proto_tag}
+	${protoc} --proto_path=${sky_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${sky_proto_files}
+	@cd ${sky_dir};git checkout -q master
 
 ${sky_dir}:
 	git clone -v ${sky_remote}
 
 clean:
-	@rm -rf ${otel_gen_dir} ${pp_gen_dir} skywalking-v8.3.0-gen-go skywalking-v9.4.0-gen-go
+	@rm -rf ${otel_gen_dir} ${pp_gen_dir} ${sky_gen_dir}
 
 rm:
 	@rm -rf ${otel_dir} ${pp_dir} ${sky_dir}
