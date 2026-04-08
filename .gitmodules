@@ -1,6 +1,6 @@
 [submodule "opentelemetry-proto"]
 path = opentelemetry-proto
-url = git@github.com:CodapeWild/opentelemetry-proto.git
+url = https://github.com/GuanceCloud/opentelemetry-proto
 [submodule "skywalking-data-collect-protocol"]
 path = skywalking-data-collect-protocol
 url = git@github.com:CodapeWild/skywalking-data-collect-protocol.git

@@ -17,12 +17,24 @@ endif
 go_src = ${GOPATH}/src
 
 # generate proto for open-telemetry
-otel_remote       := git@github.com:CodapeWild/opentelemetry-proto.git
-otel_proto_tag    := v0.19.0-guance
+otel_remote       := https://github.com/GuanceCloud/opentelemetry-proto
+otel_proto_tag    := main
 otel_dir          := opentelemetry-proto
 otel_proto_dir    := ${otel_dir}/opentelemetry/proto
 otel_proto_files  = $(wildcard ${otel_proto_dir}/*/*/*.proto ${otel_proto_dir}/*/*/*/*.proto)
 otel_gen_dir      := ./opentelemetry-gen-go
+otel_go_mapping   := \
+	--go_opt=Mopentelemetry/proto/common/v1/common.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/common/v1 \
+	--go_opt=Mopentelemetry/proto/logs/v1/logs.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/logs/v1 \
+	--go_opt=Mopentelemetry/proto/metrics/v1/metrics.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/metrics/v1 \
+	--go_opt=Mopentelemetry/proto/profiles/v1development/profiles.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/profiles/v1development \
+	--go_opt=Mopentelemetry/proto/resource/v1/resource.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/resource/v1 \
+	--go_opt=Mopentelemetry/proto/trace/v1/trace.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/trace/v1 \
+	--go_opt=Mopentelemetry/proto/collector/logs/v1/logs_service.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/collector/logs/v1 \
+	--go_opt=Mopentelemetry/proto/collector/metrics/v1/metrics_service.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/collector/metrics/v1 \
+	--go_opt=Mopentelemetry/proto/collector/profiles/v1development/profiles_service.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/collector/profiles/v1development \
+	--go_opt=Mopentelemetry/proto/collector/trace/v1/trace_service.proto=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/collector/trace/v1
+otel_go_grpc_mapping := $(patsubst --go_opt=%,--go-grpc_opt=%,$(otel_go_mapping))
 
 # generate proto for pinpoint
 pp_remote       := git@github.com:CodapeWild/pinpoint-grpc-idl.git
@@ -71,7 +83,7 @@ gen-all: rm gen-opentelemetry gen-pinpoint gen-skywalking
 .PHONY: gen-opentelemetry
 gen-opentelemetry: ${otel_dir}
 	@cd ${otel_dir};git checkout -q ${otel_proto_tag}
-	${protoc} --proto_path=${otel_dir} --go_opt=paths=import --go_out=${go_src} --go-grpc_out=${go_src} ${otel_proto_files}
+	${protoc} --proto_path=${otel_dir} --go_opt=paths=import ${otel_go_mapping} --go_out=${go_src} --go-grpc_opt=paths=import ${otel_go_grpc_mapping} --go-grpc_out=${go_src} ${otel_proto_files}
 	@cd ${otel_dir};git checkout -q main
 
 ${otel_dir}:

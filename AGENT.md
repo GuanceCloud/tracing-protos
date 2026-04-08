@@ -14,8 +14,8 @@ The root of the repository is not a Go module. Each generated output directory i
 
 ## Repository Layout
 
-- `Makefile`: generation entry points and upstream tag configuration.
-- `.gitmodules`: upstream proto repositories, all from `git@github.com:CodapeWild/...`.
+- `Makefile`: generation entry points and upstream ref configuration.
+- `.gitmodules`: upstream proto repositories. OpenTelemetry uses `https://github.com/GuanceCloud/opentelemetry-proto`; Pinpoint and SkyWalking currently use `git@github.com:CodapeWild/...`.
 - `opentelemetry-proto`: OpenTelemetry proto submodule.
 - `pinpoint-grpc-idl`: Pinpoint proto submodule.
 - `skywalking-data-collect-protocol`: SkyWalking proto submodule.
@@ -25,9 +25,14 @@ The root of the repository is not a Go module. Each generated output directory i
 
 ## Generated Go Modules
 
+Generated module Go versions:
+
+- `opentelemetry-gen-go`: `go 1.19`
+- `pinpoint-gen-go`: `go 1.18`
+- `skywalking-gen-go`: `go 1.18`
+
 All three generated modules currently use:
 
-- Go version: `1.18`
 - `google.golang.org/grpc v1.56.2`
 - `google.golang.org/protobuf v1.31.0`
 
@@ -54,9 +59,9 @@ The Makefile writes generated files to `${GOPATH}/src` using `--go_opt=paths=imp
 ${GOPATH}/src/github.com/GuanceCloud/tracing-protos
 ```
 
-Current upstream tag configuration in `Makefile`:
+Current upstream ref configuration in `Makefile`:
 
-- OpenTelemetry: `v0.19.0-guance`
+- OpenTelemetry: `main`
 - Pinpoint: `v2.3.1-guance`
 - SkyWalking: `v9.4.0-guance`
 
@@ -77,7 +82,9 @@ Important behavior:
 - `make clean` deletes the generated Go output directories: `opentelemetry-gen-go`, `pinpoint-gen-go`, and `skywalking-gen-go`.
 - `make rm` deletes the upstream proto directories: `opentelemetry-proto`, `pinpoint-grpc-idl`, and `skywalking-data-collect-protocol`.
 - Individual generation targets expect the corresponding upstream proto directory to be a usable git checkout. If submodule directories exist but are empty, run `git submodule update --init --recursive` first, or use the Makefile flow that recreates/clones them.
-- The Makefile checks out the configured tag before generation, then switches OpenTelemetry back to `main` and Pinpoint/SkyWalking back to `master`.
+- The Makefile checks out the configured ref before generation, then switches OpenTelemetry back to `main` and Pinpoint/SkyWalking back to `master`.
+- OpenTelemetry upstream proto files use `go.opentelemetry.io/proto/otlp/...` as `go_package`; keep the explicit `M...=github.com/GuanceCloud/tracing-protos/opentelemetry-gen-go/...` mappings in `Makefile` so generation lands in this repository.
+- OpenTelemetry generated bindings include profiles packages under `opentelemetry-gen-go/profiles/v1development` and `opentelemetry-gen-go/collector/profiles/v1development`.
 
 ## Verification
 
